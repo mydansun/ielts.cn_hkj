@@ -1,7 +1,7 @@
 # ielts.cn_hkj
 可以在 https://ielts.etest.edu.cn/ 实现雅思自动刷考位
 
-更多介绍：https://www.onlyke.com/html/593.html
+更多介绍：http://mydansun.github.io/ielts.cn_hkj/
 
 1. 可以监视普通考试和签证类考试两种类型
 2. 最多支持一次监视当前所有可用城市和月份（雅思页面最多只能查询两个，并且普通用户使用F5刷新是没有用的）
