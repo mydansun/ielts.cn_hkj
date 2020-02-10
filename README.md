@@ -1,5 +1,5 @@
 # ielts.cn_hkj
-可以在 https://ielts.etest.edu.cn/ 实现雅思自动刷考位
+可以在 https://ielts.neea.cn/ 实现雅思自动刷考位
 
 更多介绍：http://mydansun.github.io/ielts.cn_hkj/
 
