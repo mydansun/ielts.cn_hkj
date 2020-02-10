@@ -1,14 +1,14 @@
 (function() { 
 
 	var host = window.location.host;
-	if(host != "ielts.etest.edu.cn"){
-		alert("请勿在非ielts.etest.edu.cn激活本黑科技");
+	if(host != "ielts.neea.cn"){
+		alert("请勿在非ielts.neea.cn激活本黑科技");
 		return;
 	}
 	var https = 'https:' == document.location.protocol ? true : false;
 	if(!https){
-		alert("请使用ielts.etest.edu.cn的https版本");
-		window.location.href="https://ielts.etest.edu.cn/login";
+		alert("请使用ielts.neea.cn的https版本");
+		window.location.href="https://ielts.neea.cn/login";
 		return;
 	}
 
@@ -23,12 +23,12 @@
 	}
 	if(ielts_id === 0){
 		alert("获取报名ID失败，请先登录雅思考试报名网站");
-		window.location.href="https://ielts.etest.edu.cn/login";
+		window.location.href="https://ielts.neea.cn/login";
 		return;
 	}
-	var base_url="https://ielts.etest.edu.cn/myHome/" + ielts_id + "/";
+	var base_url="https://ielts.neea.cn/myHome/" + ielts_id + "/";
 
-	var show = "<div id=\"test\"style=\"top: 0;right: 0;bottom: 0;left: 0;height: 100%;width: 100%;position: fixed;background-color: #fff;padding-top: 70px;font-family: Helvetica Neue, Helvetica, Arial, \'Microsoft YaHei\';, sans-serif;z-index: 999;overflow-x:hidden;overflow-y:auto;display:none;\"><audio id=\"test_audio\"><source src=\"https://www.onlyke.com/ielts/notice.ogg\"type=\"audio/ogg\"style=\"display:none\"><source src=\"https://www.onlyke.com/ielts/notice.mp3\"type=\"audio/mpeg\"></audio><div class=\"container\"><div class=\"row\"><div class=\"col-md-12\"><div class=\"page-header\"><h1>雅思考试考位检测工具</h1><a href=\"https://www.onlyke.com/html/593.html\" target=\"_blank\"><span class=\"label label-default\">更多访问：www.onlyke.com</span></a></div></div></div><div class=\"row\"id=\"process-0\"><div class=\"col-md-12\"><div class=\"progress progress-striped active\"><div class=\"progress-bar progress-bar-success\"role=\"progressbar\"aria-valuenow=\"0\"aria-valuemin=\"0\"aria-valuemax=\"100\"style=\"width: 100%\">检测环境中，请稍等...</div></div></div></div><div class=\"row\"id=\"process-1\"style=\"display:none;\"><div class=\"col-md-12\"><div class=\"alert alert-danger\">清先登录雅思报名网站</div><a class=\"btn btn-primary\"href=\"https://ielts.etest.edu.cn/login\">去登陆</a></div></div><div class=\"row\"id=\"process-2\"style=\"display:none;\"><div class=\"col-md-12\"><div class=\"alert alert-info\">清选择监控的考试种类</div><button type=\"button\"class=\"btn btn-info\"id=\"test_normal\">普通考试</button><button type=\"button\"class=\"btn btn-warning ml-xs\"id=\"test_visa\">用于签证</button></div></div><div class=\"row\"id=\"process-3\"style=\"display:none;\"><div class=\"col-md-12\"><div class=\"alert alert-info\">请选择监控的场次，可以使用Ctrl和Shift多选</div><form><div class=\"form-group\"><label>城市</label><select multiple class=\"form-control\"id=\"city\"></select></div><div class=\"form-group\"><label>考试时间</label><select multiple class=\"form-control\"id=\"date\"></select></div></form><button type=\"button\"class=\"btn btn-success\"id=\"test_start\">开始</button></div></div><div class=\"row\"id=\"process-4\"style=\"display:none;\"><div class=\"col-md-12\"><div class=\"alert alert-info\">我正在为您持续监控考位，退出请刷新</div><div class=\"progress progress-striped active\"id=\"table_load\"><div class=\"progress-bar progress-bar-warning\"role=\"progressbar\"aria-valuenow=\"0\"aria-valuemin=\"0\"aria-valuemax=\"100\"style=\"width: 100%\">正在获取考位...</div></div><div class=\"progress progress-striped active\"id=\"table_finish\"style=\"display:none;\"><div class=\"progress-bar progress-bar-info\"role=\"progressbar\"aria-valuenow=\"0\"aria-valuemin=\"0\"aria-valuemax=\"100\"style=\"width: 100%\">稍后将刷新...</div></div><table class=\"table table-bordered table-striped table-vcenter\"><thead><tr><th>城市</th><th>地点</th><th>类别</th><th>考试时间</th><th>状态</th><th>考位提醒</th></tr></thead><tbody id=\"table_content\"></tbody></table></div></div></div></div>";
+	var show = "<div id=\"test\"style=\"top: 0;right: 0;bottom: 0;left: 0;height: 100%;width: 100%;position: fixed;background-color: #fff;padding-top: 70px;font-family: Helvetica Neue, Helvetica, Arial, \'Microsoft YaHei\';, sans-serif;z-index: 999;overflow-x:hidden;overflow-y:auto;display:none;\"><audio id=\"test_audio\"><source src=\"https://www.onlyke.com/ielts/notice.ogg\"type=\"audio/ogg\"style=\"display:none\"><source src=\"https://www.onlyke.com/ielts/notice.mp3\"type=\"audio/mpeg\"></audio><div class=\"container\"><div class=\"row\"><div class=\"col-md-12\"><div class=\"page-header\"><h1>雅思考试考位检测工具</h1><a href=\"https://www.onlyke.com/html/593.html\" target=\"_blank\"><span class=\"label label-default\">更多访问：www.onlyke.com</span></a></div></div></div><div class=\"row\"id=\"process-0\"><div class=\"col-md-12\"><div class=\"progress progress-striped active\"><div class=\"progress-bar progress-bar-success\"role=\"progressbar\"aria-valuenow=\"0\"aria-valuemin=\"0\"aria-valuemax=\"100\"style=\"width: 100%\">检测环境中，请稍等...</div></div></div></div><div class=\"row\"id=\"process-1\"style=\"display:none;\"><div class=\"col-md-12\"><div class=\"alert alert-danger\">清先登录雅思报名网站</div><a class=\"btn btn-primary\"href=\"https://ielts.neea.cn/login\">去登陆</a></div></div><div class=\"row\"id=\"process-2\"style=\"display:none;\"><div class=\"col-md-12\"><div class=\"alert alert-info\">清选择监控的考试种类</div><button type=\"button\"class=\"btn btn-info\"id=\"test_normal\">普通考试</button><button type=\"button\"class=\"btn btn-warning ml-xs\"id=\"test_visa\">用于签证</button></div></div><div class=\"row\"id=\"process-3\"style=\"display:none;\"><div class=\"col-md-12\"><div class=\"alert alert-info\">请选择监控的场次，可以使用Ctrl和Shift多选</div><form><div class=\"form-group\"><label>城市</label><select multiple class=\"form-control\"id=\"city\"></select></div><div class=\"form-group\"><label>考试时间</label><select multiple class=\"form-control\"id=\"date\"></select></div></form><button type=\"button\"class=\"btn btn-success\"id=\"test_start\">开始</button></div></div><div class=\"row\"id=\"process-4\"style=\"display:none;\"><div class=\"col-md-12\"><div class=\"alert alert-info\">我正在为您持续监控考位，退出请刷新</div><div class=\"progress progress-striped active\"id=\"table_load\"><div class=\"progress-bar progress-bar-warning\"role=\"progressbar\"aria-valuenow=\"0\"aria-valuemin=\"0\"aria-valuemax=\"100\"style=\"width: 100%\">正在获取考位...</div></div><div class=\"progress progress-striped active\"id=\"table_finish\"style=\"display:none;\"><div class=\"progress-bar progress-bar-info\"role=\"progressbar\"aria-valuenow=\"0\"aria-valuemin=\"0\"aria-valuemax=\"100\"style=\"width: 100%\">稍后将刷新...</div></div><table class=\"table table-bordered table-striped table-vcenter\"><thead><tr><th>城市</th><th>地点</th><th>类别</th><th>考试时间</th><th>状态</th><th>考位提醒</th></tr></thead><tbody id=\"table_content\"></tbody></table></div></div></div></div>";
 
 	var script = '<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script><link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"><style type="text/css">.m-none{margin:0!important}.m-auto{margin:0 auto!important}.m-xs{margin:5px!important}.m-sm{margin:10px!important}.m-md{margin:15px!important}.m-lg{margin:20px!important}.m-xl{margin:25px!important}.m-xlg{margin:30px!important}.mt-none{margin-top:0!important}.mt-xs{margin-top:5px!important}.mt-sm{margin-top:10px!important}.mt-md{margin-top:15px!important}.mt-lg{margin-top:20px!important}.mt-xl{margin-top:25px!important}.mt-xlg{margin-top:30px!important}.mb-none{margin-bottom:0!important}.mb-xs{margin-bottom:5px!important}.mb-sm{margin-bottom:10px!important}.mb-md{margin-bottom:15px!important}.mb-lg{margin-bottom:20px!important}.mb-xl{margin-bottom:25px!important}.mb-xlg{margin-bottom:30px!important}.mr-none{margin-left:0!important}.ml-xs{margin-left:5px!important}.ml-sm{margin-left:10px!important}.ml-md{margin-left:15px!important}.ml-lg{margin-left:20px!important}.ml-xl{margin-left:25px!important}.ml-xlg{margin-left:30px!important}.mr-none{margin-right:0!important}.mr-xs{margin-right:5px!important}.mr-sm{margin-right:10px!important}.mr-md{margin-right:15px!important}.mr-lg{margin-right:20px!important}.mr-xl{margin-right:25px!important}.mr-xlg{margin-right:30px!important}.table.table-vcenter th,.table.table-vcenter td {vertical-align: middle;}</style>';
 
@@ -263,7 +263,7 @@
 		if(Notification.permission === 'granted'){
 			new Notification('找到考位', {
 				body: "省份：" + province + "，地点：" + location + "，考试时间：" + time,
-				icon: "https://ielts.etest.edu.cn/images/blogo.png",
+				icon: "https://ielts.neea.cn/images/blogo.png",
 				tag:seat_id
 			});
 			$('#test_audio')[0].play();
