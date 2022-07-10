@@ -112,7 +112,7 @@
 	function test_setting(){
 		$.ajax({
 			cache: false,
-			url: base_url+'querySeat?productId=' + product,
+			url: base_url+'querySeat?productType=' + product,
 			type: 'GET',
 			dataType: 'html',
 			error: function(request) {
