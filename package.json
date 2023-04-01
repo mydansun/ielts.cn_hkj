@@ -1,0 +1,12 @@
+{
+  "name": "ielts.cn_hkj",
+  "version": "2.0.0",
+  "dependencies": {
+    "esbuild": "0.17.14"
+  },
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "author": "mydansun@gmail.com",
+  "license": "MIT"
+}
