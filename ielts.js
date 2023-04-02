@@ -119,17 +119,18 @@
             }));
         }
         await Promise.all(tasks);
-        showApp();
+        initApp();
     }
 
-    function showApp() {
+    function initApp()
+    {
         const appHtml = `
         <div id="__hkj_app_container">
             <div id="__hkj_app">
                 <h2 class="rainbow text-5xl mb-1">{{ title }}</h2>
                 <p class="mb-1"><a href="https://github.com/mydansun/ielts.cn_hkj" target="_blank">https://github.com/mydansun/ielts.cn_hkj</a></p>
                 <hr class="my-2">
-                <section class="mb-4" v-if="queryDates.length > 0">
+                <section class="mb-4" v-if="queryCities.length > 0">
                     <el-button type="warning" @click="resetQuery">重置选择</el-button>
                 </section>
                 <section class="mb-4">
