@@ -1,5 +1,7 @@
 # ielts.cn_hkj
 
+[![](https://data.jsdelivr.com/v1/package/gh/mydansun/ielts.cn_hkj/badge)](https://www.jsdelivr.com/package/gh/mydansun/ielts.cn_hkj)
+
 可以在 https://ielts.neea.cn/ 自动刷新可用考位信息。
 
 1. 支持普通考试和签证类考试两种类型。
