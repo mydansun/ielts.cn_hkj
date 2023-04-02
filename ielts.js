@@ -22,6 +22,7 @@
         if (!matchResult || matchResult.length < 2 || !matchResult[1]) {
             alert("获取报名ID失败，请先登录雅思考试报名网站");
             window.location.href = "https://ielts.neea.cn/login";
+            return;
         }
         loadAssets().then().catch(reason => {
             console.error(reason);
