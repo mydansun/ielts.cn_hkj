@@ -103,9 +103,8 @@
             "https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js",
             "https://cdn.jsdelivr.net/npm/element-ui@2.15.13/lib/index.min.js"
         ];
-        const tasks = [];
         for (const script of scripts) {
-            tasks.push(new Promise((resolve, reject) => {
+            await new Promise((resolve, reject) => {
                 const el = document.createElement('script');
                 el.src = script;
                 el.onload = (e) => {
@@ -116,9 +115,8 @@
                     reject(e);
                 }
                 document.head.append(el);
-            }));
+            });
         }
-        await Promise.all(tasks);
         initApp();
     }
 
