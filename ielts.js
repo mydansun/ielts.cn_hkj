@@ -249,11 +249,19 @@
                     products: [
                         {
                             value: "IELTSPBT",
-                            name: "普通考试"
+                            name: "普通雅思 纸笔考试"
+                        },
+                        {
+                            value: "IELTSCDI",
+                            name: "普通雅思 机考"
                         },
                         {
                             value: "IELTSUKVIPBT",
-                            name: "用于签证"
+                            name: "签证移民雅思 纸笔考试"
+                        },
+                        {
+                            value: "IELTSUKVICDI",
+                            name: "签证移民雅思 机考"
                         },
                     ],
                     cites: [],
