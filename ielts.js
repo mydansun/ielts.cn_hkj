@@ -120,8 +120,7 @@
         initApp();
     }
 
-    function initApp()
-    {
+    function initApp() {
         const appHtml = `
         <div id="__hkj_app_container">
             <div id="__hkj_app">
@@ -129,7 +128,8 @@
                 <p class="mb-1"><a href="https://github.com/mydansun/ielts.cn_hkj" target="_blank">https://github.com/mydansun/ielts.cn_hkj</a></p>
                 <hr class="my-2">
                 <section class="mb-4" v-if="queryCities.length > 0">
-                    <el-button type="warning" @click="resetQuery">重置选择</el-button>
+                    <el-button type="warning" @click="resetQuery" v-if="!fetching">重置选择</el-button>
+                    <el-button type="danger" @click="refreshPage" v-if="fetching">正在刷新考位，点此刷新网页以强行终止</el-button>
                 </section>
                 <section class="mb-4">
                     <div class="mb-3">
@@ -170,7 +170,7 @@
                         </el-select>
                     </div>
                     <el-button type="primary" @click="updateDates" v-if="!dateDisabled">
-                        下一步       
+                        下一步
                     </el-button>
                     <hr class="my-2">
                 </section>
@@ -277,6 +277,8 @@
                     loading: null,
                     refreshInterval: 30 * 1000,
                     lastUpdated: "",
+                    foundSeatIds: [],
+                    fetching: false,
                 }
             },
             computed: {
@@ -316,7 +318,11 @@
                     this.cites = [];
                     this.queryProductCode = "";
                     this.selectedProductCode = "";
+                    this.foundSeatIds = [];
                     this.closeLoading();
+                },
+                refreshPage() {
+                    window.location.reload();
                 },
                 cleanRefreshHandle() {
                     if (this.refreshHandle) {
@@ -374,10 +380,36 @@
                     this.closeLoading();
                 },
                 async updateDates() {
+                    const permission = Notification.permission;
+                    if (permission === "default") {
+                        await new Promise(resolve => {
+                            this.$confirm('是否打开浏览器通知，这将在有新考位时通知你', '提示', {
+                                confirmButtonText: '打开',
+                                cancelButtonText: '取消',
+                                type: 'warning'
+                            }).then(() => {
+                                Notification.requestPermission().then((permission) => {
+                                    if (permission === "granted") {
+                                        this.$message.success('消息通知已打开，将在有考位的时候通知你');
+                                    } else {
+                                        this.$message.error('消息通知打开失败，无法通知新考位');
+                                    }
+                                    resolve();
+                                });
+                            }).catch(() => {
+                                resolve();
+                            });
+                        });
+                    } else if (permission === "denied") {
+                        this.$message.error('消息通知权限被关闭，无法通知新考位');
+                    } else if (permission === "granted") {
+                        this.$message.success('消息通知已打开，将在有考位的时候通知你');
+                    }
                     this.initLoading();
                     this.cleanRefreshHandle();
                     this.queryDates = this.selectedDates.slice();
                     const tests = await this.fetchSeats();
+                    this.foundSeatIds = tests.map(test => test.seatId);
                     console.log("%d个城市总共查询到%d个考位", this.queryCities.length, tests.length, tests);
                     this.tests = tests;
                     this.refreshHandle = setTimeout(() => {
@@ -387,8 +419,19 @@
                 },
                 async continuesUpdate() {
                     const tests = await this.fetchSeats();
+                    const foundSeatIds = tests.map(test => test.seatId);
+                    const newSeatIds = foundSeatIds.filter(x => !this.foundSeatIds.includes(x));
+                    if (newSeatIds.length > 0 && Notification.permission === 'granted') {
+                        new Notification('雅思黑科技', {
+                            body: "为你找到了新的考位",
+                            icon: "https://ielts.neea.cn/project/ielts/v2/image/newlogo-4.png",
+                            tag: newSeatIds[0],
+                            requireInteraction: true
+                        });
+                    }
                     this.tests = tests;
-                    console.log("已更新，%d个城市总共查询到%d个考位", this.queryCities.length, tests.length, tests);
+                    this.foundSeatIds = Array.from(new Set(foundSeatIds.concat(this.foundSeatIds)));
+                    console.log("已更新，%d个城市总共查询到%d个考位，新增考位%d", this.queryCities.length, tests.length, tests, newSeatIds.length);
                     if (this.refreshHandle) {
                         this.refreshHandle = setTimeout(() => {
                             this.continuesUpdate();
@@ -396,6 +439,7 @@
                     }
                 },
                 async fetchSeats() {
+                    this.fetching = true;
                     const tests = [];
                     this.lastUpdated = new Date().toLocaleString();
                     for (const {name, value} of this.queryCities) {
@@ -462,6 +506,7 @@
                             await this.sleep(100);
                         }
                     }
+                    this.fetching = false;
                     return tests;
                 },
             },
