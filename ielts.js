@@ -434,7 +434,8 @@
                     }
                     this.tests = tests;
                     this.foundSeatIds = Array.from(new Set(foundSeatIds.concat(this.foundSeatIds)));
-                    console.log("已更新，%d个城市总共查询到%d个考位，新增考位%d", this.queryCities.length, tests.length, tests, newSeatIds.length);
+                    console.log("已更新，%d个城市总共查询到%d个考位，新增考位%d", this.queryCities.length, tests.length, newSeatIds.length);
+                    console.log(tests)
                     if (this.refreshHandle) {
                         this.refreshHandle = setTimeout(() => {
                             this.continuesUpdate();
