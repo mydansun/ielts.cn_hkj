@@ -138,15 +138,15 @@
                             <el-option :key="product.value" :value="product.value" v-for="product in products" :label="product.name"></el-option>
                         </el-select>
                     </div>
-                    <template v-if="cites.length > 0">
+                    <template v-if="cites.length > 0 && !typeCityDisabled">
                         <div class="mb-3">
                             <p class="mb-1">请选择下一步查询的考试城市（可多选）</p>
-                            <el-select v-model="selectedCites" placeholder="请选择" multiple filterable :disabled="typeCityDisabled" style="width: 400px;">
+                            <el-select v-model="selectedCites" placeholder="请选择" multiple filterable style="width: 400px;">
                                 <el-option :key="city.value" :value="city" v-for="city in cites" :label="city.name">
                                 </el-option>
                             </el-select>
                         </div>
-                        <el-button type="primary" @click="updateCities" v-if="!typeCityDisabled">
+                        <el-button type="primary" @click="updateCities">
                             下一步
                         </el-button>
                     </template>
@@ -162,16 +162,18 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="mb-3" v-if="availableDates.length > 0">
-                        <p class="mb-1">根据你选择的城市，可用的考试日期如下，请选择要查询日期（可多选）</p>
-                        <el-select v-model="selectedDates" placeholder="请选择" multiple filterable :disabled="dateDisabled" style="width: 400px;">
-                            <el-option :value="availableDate" v-for="availableDate in availableDates" :key="availableDate" :label="availableDate">
-                            </el-option>
-                        </el-select>
-                    </div>
-                    <el-button type="primary" @click="updateDates" v-if="!dateDisabled">
-                        下一步
-                    </el-button>
+                    <template v-if="!dateDisabled">
+                        <div class="mb-3" v-if="availableDates.length > 0">
+                            <p class="mb-1">根据你选择的城市，可用的考试日期如下，请选择要查询日期（可多选）</p>
+                            <el-select v-model="selectedDates" placeholder="请选择" multiple filterable style="width: 400px;">
+                                <el-option :value="availableDate" v-for="availableDate in availableDates" :key="availableDate" :label="availableDate">
+                                </el-option>
+                            </el-select>
+                        </div>
+                        <el-button type="primary" @click="updateDates">
+                            下一步
+                        </el-button>
+                    </template>
                     <hr class="my-2">
                 </section>
                 <section class="mb-4" v-if="queryDates.length > 0">
@@ -183,6 +185,7 @@
                             </li>
                         </ul>
                     </div>
+                    <hr class="my-2">
                     <div class="mb-3">
                         <p class="mb-1">
                             下面是查询到的可以报考的考位
