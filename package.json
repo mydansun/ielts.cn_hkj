@@ -8,7 +8,7 @@
     "build": "node build.mjs"
   },
   "author": "mydansun@gmail.com",
-  "license": "MIT",
+  "license": "AGPL-3.0-or-later",
   "devDependencies": {
     "element-ui": "^2.15.13",
     "jquery": "^1.12.4",
